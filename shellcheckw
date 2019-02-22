@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+class#! /usr/bin/env bash
 
 #####
 # Alice M.
@@ -21,18 +21,6 @@ declare -r SHELLCHECK_EXCLUDE=(
     # tries to force us to use double quotes in places where it would
     # force us to escape boatloads of things.
     SC2016
-    
-    # “error: The order of the 2>&1 and the redirect matters.
-    #  The 2>&1 has to be last.”
-    # Something like “2>&1 > /dev/null” is perfectly valid if you want
-    # to discard stdout and have stderr on stdout instead.
-    SC2069
-    
-    # “warning: Note that ~ does not expand in quotes. [SC2088]”
-    # Yeah, but what if we *need* that character?
-    # Errors caused by this should be immediately
-    # visible through execution anyway.
-    SC2088
 )
 
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
