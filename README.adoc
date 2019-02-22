@@ -3,6 +3,7 @@
 A wrapper around ShellCheck, and a wrapper around that wrapper to inspect Git revisions.
 
 https://www.shellcheck.net/
+
 https://github.com/koalaman/shellcheck
 
 I love ShellCheck, but it yields a few false positives that annoy me a lot, and I don't have the time to try to see if I can contribute to the project itself right now, so I made a wrapper that tries to calm ShellCheck down a little on a few things:
