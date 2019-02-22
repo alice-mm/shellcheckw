@@ -1,7 +1,9 @@
 #! /usr/bin/env bash
 
-declare -r SCRDIR=$(readlink -f -- "$(dirname "$0")")
-declare -r TMPD=$(mktemp -d "${TMPDIR:-/tmp}"/shellcheckw-apply-to_test-XXXXX)
+SCRDIR=$(readlink -f -- "$(dirname "$0")")
+readonly SCRDIR
+TMPD=$(mktemp -d "${TMPDIR:-/tmp}"/shellcheckw-apply-to_test-XXXXX)
+readonly TMPD
 
 . "$SCRDIR"/shellcheckw-apply-to_functions.sh
 

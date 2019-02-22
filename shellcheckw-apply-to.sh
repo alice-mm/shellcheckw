@@ -24,7 +24,8 @@ _HELP_
 }
 
 
-declare -r SCRDIR=$(readlink -f -- "$(dirname "$0")")
+SCRDIR=$(readlink -f -- "$(dirname "$0")")
+readonly SCRDIR
 . "$SCRDIR"/shellcheckw-apply-to_functions.sh
 
 

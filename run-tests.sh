@@ -2,7 +2,8 @@
 
 set -e
 
-declare -r SCRDIR=$(readlink -f -- "$(dirname "$0")")
+SCRDIR=$(readlink -f -- "$(dirname "$0")")
+readonly SCRDIR
 
 cd "$SCRDIR"
 
