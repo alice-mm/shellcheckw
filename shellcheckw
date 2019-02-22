@@ -1,0 +1,91 @@
+#! /usr/bin/env bash
+
+# Wrapper for ShellCheck.
+
+# ToDos:
+# • “is referenced but not assigned” on dumb strings when filling
+#   associative arrays.
+
+# Configuration
+
+declare -r SHELLCHECK_FORMAT=gcc
+
+# Codes of messages that must be disabled.
+unset -v SHELLCHECK_EXCLUDE
+declare -r SHELLCHECK_EXCLUDE=(
+    # ShellCheck often thinks we want expansion to happen in
+    # strings that do not even contain “$(foo)” nor “$bar” and
+    # tries to force us to use double quotes in places where it would
+    # force us to escape boatloads of things.
+    SC2016
+    
+    # “warning: Use spaces, not commas, to separate array elements.”
+    # Sometimes you need to append a string like “foo,bar” to an
+    # existing array. And here again, if you try to fill an array using
+    # commas by mistake, you'll notice pretty quick that
+    # something is wrong.
+    SC2054
+    
+    # “error: The order of the 2>&1 and the redirect matters.
+    #  The 2>&1 has to be last.”
+    # Something like “2>&1 > /dev/null” is perfectly valid if you want
+    # to discard stdout and have stderr on stdout instead.
+    SC2069
+    
+    # “warning: Note that ~ does not expand in quotes. [SC2088]”
+    # Yeah, but what if we *need* that character?
+    # Errors caused by this should be immediately
+    # visible through execution anyway.
+    SC2088
+)
+
+declare -r SCRDIR=$(readlink -f -- "$(dirname "$0")")
+
+
+# Args check
+
+if [ -z "$1" ]
+then
+    printf '%s: Error: No input file.\n' "$(basename "$0")" >&2
+    exit 1
+fi
+
+if [ ! -f "$1" ] || [ ! -r "$1" ]
+then
+    printf '%s: Error: Input file %q is not a normal file or cannot be read.\n' \
+            "$(basename "$0")" "$1" >&2
+    exit 2
+fi
+
+
+# Functions
+
+. "$SCRDIR"/shellcheckw_functions.sh
+
+
+# Main
+
+unset -v exclusion_args
+exclusion_args=()
+for code in "${SHELLCHECK_EXCLUDE[@]}"
+do
+    exclusion_args+=(
+        -e "$code"
+    )
+done
+
+status=0
+output=$(
+    shellcheck --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
+        preprocess_script "$1"
+    ) 2>&1
+) ||
+status=$?
+
+if [ "$output" ]
+then
+    printf '\n  === %q ===\n\n' "$1"
+    sed "s/^[^:]*://" <<< "$output"
+fi
+
+exit "$status"
