@@ -6,11 +6,8 @@
 # github.com/alice-mm/shellcheckw
 #####
 
-# Wrapper for ShellCheck.
+# Wrapper for ShellCheck. See the ReadMe file of the repository.
 
-# ToDos:
-# • “is referenced but not assigned” on dumb strings when filling
-#   associative arrays.
 
 # Configuration
 
