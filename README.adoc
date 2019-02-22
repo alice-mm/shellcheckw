@@ -40,3 +40,8 @@ $ ./shellcheckw-apply-to.sh -h
 ```
 
 As an interesting exercise, I also added unit-test-like scripts that do a great job in helping me building nice functions.
+
+
+## License
+
+I wrote most of this during my free time, but the main motivation source was to be able to provide something at least a little bit useful to Yseop (https://yseop.com/). Anyone is free to use that stuff for anything legal, but if you show some gratitude and leave a link to the repository or to my website or anything I'll be happier, of course.
