@@ -1,0 +1,41 @@
+# shellcheckw
+
+A wrapper around ShellCheck, and a wrapper around that wrapper to inspect Git revisions.
+
+https://www.shellcheck.net/
+https://github.com/koalaman/shellcheck
+
+I love ShellCheck, but it yields a few false positives that annoy me a lot, and I don't have the time to try to see if I can contribute to the project itself right now, so I made a wrapper that tries to calm ShellCheck down a little on a few things:
+
+```
+$ ./shellcheckw path/to/a/script
+```
+
+Additionally, I wrapped this wrapper in a script able to do these two things:
+
+* find shell scripts recursively from files and directories, or
+* find shell scripts that were modified between two Git revisions of a project, using commit hashes or branch names or whatever.
+
+```
+$ ./shellcheckw-apply-to.sh -h
+
+  Usage:
+
+    shellcheckw-apply-to.sh REVISION_A REVISION_B [path/to/project/]
+    shellcheckw-apply-to.sh -p PATH...
+    shellcheckw-apply-to.sh -h
+
+  The first form checks scripts that were modified between the two given
+  Git revisions (commits, branches...). You can explicitly give the path
+  to a Git project so that the script will move to it before checking
+  anything.
+  
+  The second form checks scripts found by searching recursively from the
+  given paths. The paths can lead to nondirectory files themselves,
+  in which case these files will be checked.
+
+  The “-h” option prints this help message and exits.
+
+```
+
+As an interesting exercise, I also added unit-test-like scripts that do a great job in helping me building nice functions.
