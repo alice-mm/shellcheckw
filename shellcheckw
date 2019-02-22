@@ -22,13 +22,6 @@ declare -r SHELLCHECK_EXCLUDE=(
     # force us to escape boatloads of things.
     SC2016
     
-    # “warning: Use spaces, not commas, to separate array elements.”
-    # Sometimes you need to append a string like “foo,bar” to an
-    # existing array. And here again, if you try to fill an array using
-    # commas by mistake, you'll notice pretty quick that
-    # something is wrong.
-    SC2054
-    
     # “error: The order of the 2>&1 and the redirect matters.
     #  The 2>&1 has to be last.”
     # Something like “2>&1 > /dev/null” is perfectly valid if you want
