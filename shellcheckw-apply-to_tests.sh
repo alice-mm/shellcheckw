@@ -1,5 +1,11 @@
 #! /usr/bin/env bash
 
+#####
+# Alice M.
+# www.alicem.net
+# github.com/alice-mm/shellcheckw
+#####
+
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
 readonly SCRDIR
 TMPD=$(mktemp -d "${TMPDIR:-/tmp}"/shellcheckw-apply-to_test-XXXXX)
