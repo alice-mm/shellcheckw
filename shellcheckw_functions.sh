@@ -1,5 +1,11 @@
 #! /usr/bin/env bash
 
+#####
+# Alice M.
+# www.alicem.net
+# github.com/alice-mm/shellcheckw
+#####
+
 declare -r DEFAULT_SHEBANG='#! /usr/bin/env bash'
 
 

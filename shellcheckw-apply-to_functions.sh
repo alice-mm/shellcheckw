@@ -1,5 +1,11 @@
 #! /usr/bin/env bash
 
+#####
+# Alice M.
+# www.alicem.net
+# github.com/alice-mm/shellcheckw
+#####
+
 
 # Any file standing below a directory
 # bearing one of these names will be ignored.

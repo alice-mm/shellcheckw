@@ -1,5 +1,11 @@
 #! /usr/bin/env bash
 
+#####
+# Alice M.
+# www.alicem.net
+# github.com/alice-mm/shellcheckw
+#####
+
 set -e
 
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
