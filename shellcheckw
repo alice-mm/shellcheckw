@@ -39,7 +39,8 @@ declare -r SHELLCHECK_EXCLUDE=(
     SC2088
 )
 
-declare -r SCRDIR=$(readlink -f -- "$(dirname "$0")")
+SCRDIR=$(readlink -f -- "$(dirname "$0")")
+readonly SCRDIR
 
 
 # Args check

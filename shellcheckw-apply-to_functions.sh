@@ -13,8 +13,10 @@ declare -r IGNORED_DIRS=(
 # the file will not be checked.
 unset -v IGNORED_FILES
 declare -A IGNORED_FILES
-IGNORED_FILES[mvnw]=1
-IGNORED_FILES[gradlew]=1
+for name in mvnw gradlew
+do
+    IGNORED_FILES[$name]=1
+done
 
 
 # $1    Path to a file.
