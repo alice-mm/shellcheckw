@@ -45,7 +45,7 @@ fi
 
 # Functions
 
-. "$SCRDIR"/shellcheckw_functions.sh
+. "$SCRDIR"/shellcheckw_functions.sh || exit
 
 
 # Main
