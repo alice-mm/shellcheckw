@@ -32,7 +32,7 @@ _HELP_
 
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
 readonly SCRDIR
-. "$SCRDIR"/shellcheckw-apply-to_functions.sh
+. "$SCRDIR"/shellcheckw-apply-to_functions.sh || exit
 
 
 unset -v CHECK_PATHS_MODE
