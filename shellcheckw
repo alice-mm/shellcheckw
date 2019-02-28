@@ -26,6 +26,17 @@ declare -r SHELLCHECK_EXCLUDE=(
     # tries to force us to use double quotes in places where it would
     # force us to escape boatloads of things.
     SC2016
+    
+    # “note: Prefer explicit -n to check non-empty string
+    # (or use =/-ne to check boolean/integer).”
+    # Their logic to issue this note is that users not familiar with
+    # the language will not understand that well, but c'mon, I don't
+    # see why the “-n” version would be more easy to understand.
+    # The guy will end up checking the manual or something anyway.
+    # The simple fact that the message tells stuff about “booleans”
+    # make me want to ignore that note since “real” booleans do not
+    # even exist in Bash.
+    SC2244
 )
 
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
