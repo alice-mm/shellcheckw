@@ -27,6 +27,12 @@ declare -r SHELLCHECK_EXCLUDE=(
     # force us to escape boatloads of things.
     SC2016
     
+    # “warning: This redirection doesn't have a command.
+    # Move to its command (or use 'true' as no-op).”
+    # It's a feature. Even their Wiki page says this.
+    # I often use “> foo” to empty a file.
+    SC2188
+    
     # “note: Prefer explicit -n to check non-empty string
     # (or use =/-ne to check boolean/integer).”
     # Their logic to issue this note is that users not familiar with
@@ -105,14 +111,14 @@ status=0
 output=$(
     "${SHELLCHECK[@]}" -x --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
         preprocess_script "$1"
-    ) 2>&1
+    ) 2>&1 | sed 's/^[^:]*://'
+    # (“sed” to remove the ugly filenames that show file descriptor numbers.)
 ) ||
 status=$?
 
 if [ "$output" ]
 then
-    printf '\n  === %q ===\n\n' "$1"
-    sed "s/^[^:]*://" <<< "$output"
+    printf '\n  === %q ===\n\n%s\n' "$1" "$output"
 fi
 
 exit "$status"
