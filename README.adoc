@@ -42,6 +42,13 @@ $ ./shellcheckw-apply-to.sh -h
 As an interesting exercise, I also added unit-test-like scripts that do a great job in helping me building nice functions.
 
 
+## Shellcheck version
+
+These guys did a great job at eliminating some false positives and stuff. For maximal efficiency, you should really consider building `shellcheck` from its source files, following the instructions given on their GitHub repository: https://github.com/koalaman/shellcheck#compiling-from-source
+
+It might be a bit scary, but in the end it is rather easy. On most machines, it should actually take more time for the commands to run that for you to understand the instructions.
+
+
 ## License
 
 I wrote most of this during my free time, but the main motivation source was to be able to provide something at least a little bit useful to Yseop (https://yseop.com/). Anyone is free to use that stuff for anything legal, but if you show some gratitude and leave a link to the repository or to my website or anything I'll be happier, of course.
