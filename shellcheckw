@@ -9,7 +9,12 @@
 # Wrapper for ShellCheck. See the ReadMe file of the repository.
 
 
-# Configuration
+# ===== Configuration
+
+# Path to shellcheck, or just the program's name if it is in your $PATH.
+# You can add arguments in the array, too.
+unset -v SHELLCHECK
+declare -r SHELLCHECK=(shellcheck)
 
 declare -r SHELLCHECK_FORMAT=gcc
 
@@ -27,7 +32,32 @@ SCRDIR=$(readlink -f -- "$(dirname "$0")")
 readonly SCRDIR
 
 
-# Args check
+# ===== Dependencies check
+
+# Names of constants that hold necessary programs.
+unset -v DEPS
+declare -r DEPS=(
+    SHELLCHECK
+)
+
+unset -v must_exit
+for constname in "${DEPS[@]}"
+do
+    if ! type "${!constname}" &> /dev/null
+    then
+        printf '%s: The command %q mentioned by the configuration constant %q was not found. Please install this program or change the configuration of %q.\n' \
+                "$(basename "$0")" "${!constname}" "$constname" "$(basename "$0")" >&2
+        must_exit=1
+    fi
+done
+
+if [ "$must_exit" ]
+then
+    exit 3
+fi
+
+
+# ===== Arguments check
 
 if [ -z "$1" ]
 then
@@ -43,12 +73,12 @@ then
 fi
 
 
-# Functions
+# ===== Functions
 
 . "$SCRDIR"/shellcheckw_functions.sh || exit
 
 
-# Main
+# ===== Main
 
 unset -v exclusion_args
 exclusion_args=()
@@ -61,7 +91,7 @@ done
 
 status=0
 output=$(
-    shellcheck --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
+    "${SHELLCHECK[@]}" --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
         preprocess_script "$1"
     ) 2>&1
 ) ||
