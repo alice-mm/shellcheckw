@@ -79,6 +79,10 @@ do
         p)
             declare -r CHECK_PATHS_MODE=1
             ;;
+        
+        *)
+            exit 1
+            ;;
     esac
 done
 shift $((OPTIND - 1))
