@@ -44,7 +44,7 @@ As an interesting exercise, I also added unit-test-like scripts that do a great 
 
 ## Shellcheck version
 
-These guys did a great job at eliminating some false positives and stuff. For maximal efficiency, you should really consider building `shellcheck` from its source files, following the instructions given on their GitHub repository: https://github.com/koalaman/shellcheck#compiling-from-source
+These guys did a great job at eliminating some false positives and stuff, and the versions from package repositories like the ones used for Ubuntu are quite outdated. For maximal efficiency, you should really consider building `shellcheck` from its source files, following the instructions given on their GitHub repository: https://github.com/koalaman/shellcheck#compiling-from-source
 
 It might be a bit scary, but in the end it is rather easy. On most machines, it should actually take more time for the commands to run that for you to understand the instructions.
 
