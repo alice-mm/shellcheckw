@@ -6,6 +6,34 @@
 # github.com/alice-mm/shellcheckw
 #####
 
+
+unset -v GIT
+declare -r GIT=(git)
+
+
+# Names of constants that hold necessary programs.
+unset -v DEPS
+declare -r DEPS=(
+    GIT
+)
+
+unset -v must_exit
+for constname in "${DEPS[@]}"
+do
+    if ! type "${!constname}" &> /dev/null
+    then
+        printf '%s: The command %q mentioned by the configuration constant %q was not found. Please install this program or change the configuration of %q.\n' \
+                "$(basename "$0")" "${!constname}" "$constname" "$(basename "$0")" >&2
+        must_exit=1
+    fi
+done
+
+if [ "$must_exit" ]
+then
+    exit 3
+fi
+
+
 function print_help {
     cat << _HELP_
 
@@ -71,7 +99,7 @@ fi
 if [ ! "$CHECK_PATHS_MODE" ]
 then
     # Move to the root of the project so that paths make sense.
-    cd "$(git rev-parse --show-toplevel)" ||
+    cd "$("${GIT[@]}" rev-parse --show-toplevel)" ||
     exit
     
     printf '%s: Project: %q\n' "$(basename "$0")" "$(pwd)"
@@ -131,7 +159,7 @@ done < <(
     then
         list_all_files_from "$@"
     else
-        if ! git diff --name-only "$1" "$2"
+        if ! "${GIT[@]}" diff --name-only "$1" "$2"
         then
             printf '%s: Git error. Check your arguments.\n' "$(basename "$0")" >&2
         fi
