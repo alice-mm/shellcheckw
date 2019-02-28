@@ -60,6 +60,8 @@ _HELP_
 
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
 readonly SCRDIR
+
+# shellcheck source=shellcheckw-apply-to_functions.sh
 . "$SCRDIR"/shellcheckw-apply-to_functions.sh || exit
 
 
