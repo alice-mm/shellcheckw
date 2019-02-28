@@ -88,7 +88,10 @@ done
 shift $((OPTIND - 1))
 
 
-if [ $# -eq 0 ] || [ $# -lt 2 -a ! "$CHECK_PATHS_MODE" ]
+# Do we have enough arguments given the current analysis mode?
+if [ $# -eq 0 ] || {
+        [ $# -lt 2 ] && [ ! "$CHECK_PATHS_MODE" ]
+    }
 then
     print_help
     exit 1
