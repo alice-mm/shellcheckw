@@ -86,6 +86,7 @@ fi
 
 # ===== Functions
 
+# shellcheck source=shellcheckw_functions.sh
 . "$SCRDIR"/shellcheckw_functions.sh || exit
 
 
@@ -102,7 +103,7 @@ done
 
 status=0
 output=$(
-    "${SHELLCHECK[@]}" --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
+    "${SHELLCHECK[@]}" -x --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
         preprocess_script "$1"
     ) 2>&1
 ) ||
