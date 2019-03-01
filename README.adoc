@@ -59,7 +59,7 @@ PATH+=':/path/to/shellcheckw/bin/'
 If a warning annoys you, remember those things:
 
 * ShellCheck is _often right_, so consider the issue from a neutral standpoint rather than yelling at it right from the start.
-* Remember that each of its message has a Wiki page, like: https://github.com/koalaman/shellcheck/wiki/SC1090
+* Remember that each of its messages has a Wiki page, like: https://github.com/koalaman/shellcheck/wiki/SC1090
 * If you really want to ignore a warning, remember that it can be done locally.
   See: https://github.com/koalaman/shellcheck/wiki/Ignore
 * If you want further insights on a particular piece of script, I'll be glad to answer your questions. 😛
