@@ -11,7 +11,7 @@ set -e
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
 readonly SCRDIR
 
-cd "$SCRDIR"
+cd "$SCRDIR"/test/
 
 ./shellcheckw_tests.sh
 ./shellcheckw-apply-to_tests.sh

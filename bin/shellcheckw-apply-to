@@ -35,13 +35,17 @@ fi
 
 
 function print_help {
+    local execname
+    
+    execname=$(printf '%q' "$0")
+
     cat << _HELP_
 
   Usage:
 
-    $(printf '%q' "$(basename "$0")") REVISION_A REVISION_B [path/to/project/]
-    $(printf '%q' "$(basename "$0")") -p PATH...
-    $(printf '%q' "$(basename "$0")") -h
+    ${bold}${execname} REVISION_A REVISION_B [path/to/project/]${norm}
+    ${bold}${execname} -p PATH...${norm}
+    ${bold}${execname} -h${norm}
 
   The first form checks scripts that were modified between the two given
   Git revisions (commits, branches...). You can explicitly give the path
@@ -61,8 +65,8 @@ _HELP_
 SCRDIR=$(readlink -f -- "$(dirname "$0")")
 readonly SCRDIR
 
-# shellcheck source=shellcheckw-apply-to_functions.sh
-. "$SCRDIR"/shellcheckw-apply-to_functions.sh || exit
+# shellcheck source=../lib/shellcheckw-apply-to_functions.sh
+. "$SCRDIR"/../lib/shellcheckw-apply-to_functions.sh || exit
 
 
 unset -v CHECK_PATHS_MODE

@@ -11,8 +11,8 @@ readonly SCRDIR
 TMPF=$(mktemp "${TMPDIR:-/tmp}"/shellcheckw_test-XXXXX)
 readonly TMPF
 
-# shellcheck source=shellcheckw_functions.sh
-. "$SCRDIR"/shellcheckw_functions.sh
+# shellcheck source=../lib/shellcheckw_functions.sh
+. "$SCRDIR"/../lib/shellcheckw_functions.sh
 
 
 set -evx

@@ -92,8 +92,8 @@ fi
 
 # ===== Functions
 
-# shellcheck source=shellcheckw_functions.sh
-. "$SCRDIR"/shellcheckw_functions.sh || exit
+# shellcheck source=../lib/shellcheckw_functions.sh
+. "$SCRDIR"/../lib/shellcheckw_functions.sh || exit
 
 
 # ===== Main
@@ -109,8 +109,11 @@ done
 
 status=0
 output=$(
+    # Moving to the script's directory help shellcheck to resolve file inclusions
+    # via “source” / “.” and avoids silly “file not found” errors that it might spout.
+    cd "$(dirname "$1")" &&
     "${SHELLCHECK[@]}" -x --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
-        preprocess_script "$1"
+        preprocess_script "$(basename "$1")"
     ) 2>&1
 ) ||
 status=$?

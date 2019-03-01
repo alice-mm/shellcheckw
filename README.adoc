@@ -1,15 +1,15 @@
 # shellcheckw
 
-A wrapper around ShellCheck, and a wrapper around that wrapper to inspect Git revisions.
+A wrapper around ShellCheck, and a wrapper around that wrapper to inspect Git revisions and file hierarchies.
 
-https://www.shellcheck.net/
+Official ShellCheck website: https://www.shellcheck.net/
 
-https://github.com/koalaman/shellcheck
+Official GitHub repository: https://github.com/koalaman/shellcheck
 
 I love ShellCheck, but it yields a few false positives that annoy me a lot, and I don't have the time to try to see if I can contribute to the project itself right now, so I made a wrapper that tries to calm ShellCheck down a little on a few things:
 
 ```
-$ ./shellcheckw path/to/a/script
+$ ./bin/shellcheckw path/to/a/script
 ```
 
 Additionally, I wrapped this wrapper in a script able to do these two things:
@@ -18,13 +18,13 @@ Additionally, I wrapped this wrapper in a script able to do these two things:
 * find shell scripts that were modified between two Git revisions of a project, using commit hashes or branch names or whatever.
 
 ```
-$ ./shellcheckw-apply-to.sh -h
+$ ./bin/shellcheckw-apply-to -h
 
   Usage:
 
-    shellcheckw-apply-to.sh REVISION_A REVISION_B [path/to/project/]
-    shellcheckw-apply-to.sh -p PATH...
-    shellcheckw-apply-to.sh -h
+    ./bin/shellcheckw-apply-to REVISION_A REVISION_B [path/to/project/]
+    ./bin/shellcheckw-apply-to -p PATH...
+    ./bin/shellcheckw-apply-to -h
 
   The first form checks scripts that were modified between the two given
   Git revisions (commits, branches...). You can explicitly give the path
@@ -42,11 +42,38 @@ $ ./shellcheckw-apply-to.sh -h
 As an interesting exercise, I also added unit-test-like scripts that do a great job in helping me building nice functions.
 
 
-## Shellcheck version
+## Installing
 
-These guys did a great job at eliminating some false positives and stuff, and the versions from package repositories like the ones used for Ubuntu are quite outdated. For maximal efficiency, you should really consider building `shellcheck` from its source files, following the instructions given on their GitHub repository: https://github.com/koalaman/shellcheck#compiling-from-source
+As for many programs, the only thing that you might have to do is to add the useful executable files to your `PATH` by writing an assignment in your shell's profile (`.bashrc`, `.zshrc`, or whatever):
 
-It might be a bit scary, but in the end it is rather easy. On most machines, it should actually take more time for the commands to run that for you to understand the instructions.
+[source,bash]
+```
+PATH+=':/path/to/shellcheckw/bin/'
+```
+
+(I'll never understand why so few people use `+=` in this context.)
+
+
+## Troubleshooting
+
+If a warning annoys you, remember those things:
+
+* ShellCheck is _often right_, so consider the issue from a neutral standpoint rather than yelling at it right from the start.
+* Remember that each of its message has a Wiki page, like: https://github.com/koalaman/shellcheck/wiki/SC1090
+* If you really want to ignore a warning, remember that it can be done locally.
+  See: https://github.com/koalaman/shellcheck/wiki/Ignore
+* If you want further insights on a particular piece of script, I'll be glad to answer your questions. 😛
+
+
+## ShellCheck version
+
+These guys did a great job at eliminating some false positives and stuff.
+However, the versions from package repositories like the ones used for Ubuntu tend to be quite outdated.
+For maximal efficiency, you should really consider building `shellcheck` from its source files, following the instructions given on their GitHub repository:
+https://github.com/koalaman/shellcheck#compiling-from-source
+
+It might be a bit scary, but in the end it is rather easy.
+On most machines, it should actually take more time for the commands to run that for you to understand the instructions.
 
 
 ## License
