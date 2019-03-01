@@ -11,8 +11,8 @@ readonly SCRDIR
 TMPD=$(mktemp -d "${TMPDIR:-/tmp}"/shellcheckw-apply-to_test-XXXXX)
 readonly TMPD
 
-# shellcheck source=shellcheckw-apply-to_functions.sh
-. "$SCRDIR"/shellcheckw-apply-to_functions.sh
+# shellcheck source=../lib/shellcheckw-apply-to_functions.sh
+. "$SCRDIR"/../lib/shellcheckw-apply-to_functions.sh
 
 
 set -evx
