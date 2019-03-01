@@ -111,13 +111,18 @@ status=0
 output=$(
     "${SHELLCHECK[@]}" -x --format "$SHELLCHECK_FORMAT" "${exclusion_args[@]}" <(
         preprocess_script "$1"
-    ) 2>&1 | sed 's/^[^:]*://'
-    # (“sed” to remove the ugly filenames that show file descriptor numbers.)
+    ) 2>&1
 ) ||
 status=$?
 
 if [ "$output" ]
 then
+    # (“sed” to remove the ugly filenames that show file descriptor numbers.)
+    # Can't seem to be able to use ${foo//…/…} since we need
+    # to process several lines and I'm not even sure these patterns
+    # allow to express what I need here.
+    # shellcheck disable=SC2001
+    output=$(sed 's/^[^:]*://' <<< "$output")
     printf '\n  === %q ===\n\n%s\n' "$1" "$output"
 fi
 
