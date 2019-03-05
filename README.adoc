@@ -73,7 +73,7 @@ For maximal efficiency, you should really consider building `shellcheck` from it
 https://github.com/koalaman/shellcheck#compiling-from-source
 
 It might be a bit scary, but in the end it is rather easy.
-On most machines, it should actually take more time for the commands to run that for you to understand the instructions.
+On most machines, it should actually take more time for the commands to run than for you to understand the instructions.
 
 
 ## License
