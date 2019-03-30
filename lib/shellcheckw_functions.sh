@@ -33,15 +33,5 @@ function preprocess_script {
         # and ASCII ones.
         
         s/[“”‘’]/QUOTES/g
-        
-        
-        # Hide (by commenting them out) lines with just
-        # a no-op used for expansions:
-        #
-        #   : ${foo:?plop} "${bar:=patate}" ${gus:?}
-        #       ↓
-        #   #: ${foo:?plop} "${bar:=patate}" ${gus:?}
-        
-        s/^\s*(:|true|false)(\s+("?)\$\{\w+:[=?][^}]*\}\3)+\s*$/#&/
     ' "$1"
 }
